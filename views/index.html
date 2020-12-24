@@ -4,12 +4,12 @@
 <div class="text">
    <ul>
        {{ range . }}
-       <li>{{ .Name }} - {{ .Price }}
-           {{ if lt .Stock 3}}
+       <li>{{ .Name }} - {{ .Price }} - {{ .StockStatus }}
+           <!-- {{ if lt .Stock 3}}
            - Stock {{ .Stock }} Hampir habis
            {{ else }}
             - Stock {{ .Stock }}
-           {{ end }}
+           {{ end }} -->
        </li> 
        {{ end }}
    </ul>
