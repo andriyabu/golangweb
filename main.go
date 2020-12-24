@@ -1,10 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"golangweb/handler"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func main() {
@@ -15,11 +14,11 @@ func main() {
 		w.Write([]byte("Profile Page"))
 	}
 	//routing
-	mux.HandleFunc("/", homeHandler)
-	mux.HandleFunc("/hello", helloHandler)
-	mux.HandleFunc("/about", aboutHandler)
+	mux.HandleFunc("/", handler.HomeHandler)
+	mux.HandleFunc("/hello", handler.HelloHandler)
+	mux.HandleFunc("/about", handler.AboutHandler)
 	mux.HandleFunc("/profile", profileHandler)
-	mux.HandleFunc("/product", productHandler)
+	mux.HandleFunc("/product", handler.ProductHandler)
 	//function in routing parameter
 	mux.HandleFunc("/service", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Our Service"))
@@ -28,34 +27,4 @@ func main() {
 	err := http.ListenAndServe(":8080", mux)
 	log.Fatal(err)
 
-}
-
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-	w.Write([]byte("Welcome to home page"))
-}
-
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Heloo saya lagi belaja web golang"))
-
-}
-
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1 style='color: red'> About Page </h1>"))
-}
-
-func productHandler(w http.ResponseWriter, r *http.Request) {
-	id := r.URL.Query().Get("id")
-
-	idNumb, err := strconv.Atoi(id)
-
-	if err != nil || idNumb < 1 {
-		http.NotFound(w, r)
-		return
-	}
-
-	fmt.Fprintf(w, "Product page : %d", idNumb)
 }
