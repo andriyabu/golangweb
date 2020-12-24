@@ -1,0 +1,74 @@
+{{ define "layout" }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <style>
+        *{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        header {
+            background-color: blueviolet;
+        }
+
+        nav {
+            background-color: blue;
+            text-align: center;
+        }
+        header nav ul {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        header nav ul li {
+            display: inline-block;
+            list-style-type: none;
+            margin-left: 10px;
+        }
+
+        header nav ul li a{
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            
+        }
+
+        main {
+            text-align: center;
+            min-height: 600px;
+            background-color: cadetblue;
+            padding-top: 20px;
+        }
+
+        footer {
+            background-color: blue;
+            padding: 20px 50px 20px 50px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {{ template "main" .}}
+    </main>
+    <footer>
+        Copyright &copy; belajargolang.com
+    </footer>
+</body>
+</html>
+
+{{ end }}
