@@ -2,6 +2,16 @@
 
 {{ define "main" }}
 <div class="text">
-    <h2>{{ .content }}</h2>
+   <ul>
+       {{ range . }}
+       <li>{{ .Name }} - {{ .Price }}
+           {{ if lt .Stock 3}}
+           - Stock {{ .Stock }} Hampir habis
+           {{ else }}
+            - Stock {{ .Stock }}
+           {{ end }}
+       </li> 
+       {{ end }}
+   </ul>
 </div>
 {{ end }}
