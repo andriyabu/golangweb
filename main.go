@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -17,6 +19,7 @@ func main() {
 	mux.HandleFunc("/hello", helloHandler)
 	mux.HandleFunc("/about", aboutHandler)
 	mux.HandleFunc("/profile", profileHandler)
+	mux.HandleFunc("/product", productHandler)
 	//function in routing parameter
 	mux.HandleFunc("/service", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Our Service"))
@@ -42,4 +45,17 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("<h1 style='color: red'> About Page </h1>"))
+}
+
+func productHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+
+	idNumb, err := strconv.Atoi(id)
+
+	if err != nil || idNumb < 1 {
+		http.NotFound(w, r)
+		return
+	}
+
+	fmt.Fprintf(w, "Product page : %d", idNumb)
 }
